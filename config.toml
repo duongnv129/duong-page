@@ -6,7 +6,7 @@ title = "Beautiful Hugo"
 canonifyurls  = true
 
 DefaultContentLanguage = "en"
-theme = "beautifulhugo"
+theme = "base16"
 metaDataFormat = "yaml"
 pygmentsUseClasses = true
 pygmentCodeFences = true

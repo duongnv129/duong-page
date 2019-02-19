@@ -6,15 +6,15 @@ variables:
 
 test:
   script:
-  - hugo
+    - hugo
   except:
-  - master
+    - development
 
 pages:
   script:
-  - hugo
+    - hugo
   artifacts:
     paths:
-    - public
+      - public
   only:
-  - master
+    - development
