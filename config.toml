@@ -2,7 +2,7 @@ baseurl = "https://duong.page"
 contentdir    = "content"
 layoutdir     = "layouts"
 publishdir    = "public"
-title = "Duong"
+title         = "Duong"
 canonifyurls  = true
 
 DefaultContentLanguage = "en"
@@ -14,7 +14,7 @@ pygmentCodeFences = true
 #googleAnalytics = "XXX"
 
 [Params]
-  subtitle = "Hugo Blog Template for GitLab Pages"
+  subtitle = "Duong's Blog"
   logo = "img/duong.jpg"
   favicon = "img/duong.ico"
   dateFormat = "January 2, 2006"
@@ -38,7 +38,6 @@ pygmentCodeFences = true
   email = "nguyenduong127@gmail.com"  
   github = "nguyenduong127"
   twitter = "nguyenduong127"
-  reddit = "username"
   linkedin = "nguyenduong127"
 
 [[menu.main]]
