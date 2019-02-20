@@ -29,21 +29,12 @@ Author:
 
 menu:
   main:
-    - identifier: samples
-      name: Samples
-      weight: 2
-    - parent: samples
-      name: Big Image Sample
-      url: post/2017-03-07-bigimg-sample
+    - name: Blog
+      url: tags/me
       weight: 1
-    - parent: samples
-      name: Math Sample
-      url: post/2017-03-05-math-sample
+    - name: Technology
+      url: tags/tech
       weight: 2
-    - parent: samples
-      name: Code Sample
-      url: post/2016-03-08-code-sample
-      weight: 3
     - name: About
       url: page/about/
       weight: 3

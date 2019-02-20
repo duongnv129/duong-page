@@ -1,1 +1,1 @@
-## There are my stories
+## Welcome to my blog!
