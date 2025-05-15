@@ -11,10 +11,10 @@ title = "Facebook"
 icon = "fab fa-facebook"
 
 [[social_icons]]
-id = "googleplus"
-url = "https://www.plus.google.com/%s"
-title = "Google+"
-icon = "fab fa-google-plus"
+id = "github"
+url = "https://github.com/%s"
+title = "GitHub"
+icon = "fab fa-github"
 
 [[social_icons]]
 id = "gitlab"
@@ -23,16 +23,22 @@ title = "GitLab"
 icon = "fab fa-gitlab"
 
 [[social_icons]]
-id = "github"
-url = "https://github.com/%s"
-title = "GitHub"
-icon = "fab fa-github"
+id = "bitbucket"
+url = "https://bitbucket.org/%s"
+title = "Bitbucket"
+icon = "fab fa-bitbucket"
 
 [[social_icons]]
 id = "twitter"
 url = "https://twitter.com/%s"
 title = "Twitter"
-icon = "fab fa-twitter"
+icon = "fab fa-x-twitter"
+
+[[social_icons]]
+id = "slack"
+url = "https://%s.slack.com/"
+title = "Slack"
+icon = "fab fa-slack"
 
 [[social_icons]]
 id = "reddit"
@@ -97,14 +103,8 @@ icon = "fab fa-bandcamp"
 [[social_icons]]
 id = "itchio"
 url = "https://itch.io/profile/%s"
-title = "itch.io"
+title = "Itch.io"
 icon = "fas fa-gamepad"
-
-[[social_icons]]
-id = "steam"
-url = "https://steamcommunity.com/id/%s"
-title = "Steam"
-icon = "fab fa-steam"
 
 [[social_icons]]
 id = "keybase"
@@ -113,9 +113,122 @@ title = "Keybase"
 icon = "fab fa-keybase"
 
 [[social_icons]]
-id = "Goodreads"
-url = "https://www.goodreads.com/%s"
+id = "vk"
+url = "https://vk.com/%s"
+title = "VK"
+icon = "fab fa-vk"
+
+[[social_icons]]
+id = "paypal"
+url = "https://paypal.me/%s"
+title = "PayPal"
+icon = "fab fa-paypal"
+
+[[social_icons]]
+id = "telegram"
+url = "https://telegram.me/%s"
+title = "Telegram"
+icon = "fab fa-telegram"
+
+[[social_icons]]
+id = "500px"
+url = "https://500px.com/%s"
+title = "500px"
+icon = "fab fa-500px"
+
+[[social_icons]]
+id = "codepen"
+url = "https://codepen.io/%s"
+title = "CodePen"
+icon = "fab fa-codepen"
+
+[[social_icons]]
+id = "kaggle"
+url = "https://www.kaggle.com/%s"
+title = "kaggle"
+icon = "fab fa-kaggle"
+
+[[social_icons]]
+id = "mastodon"
+url = "https://%s"
+title = "Mastodon"
+icon = "fab fa-mastodon"
+rel = "me"
+
+[[social_icons]]
+id = "weibo"
+url = "https://weibo.com/%s"
+title = "Weibo"
+icon = "fab fa-weibo"
+
+[[social_icons]]
+id = "medium"
+url = "https://medium.com/@%s"
+title = "Medium"
+icon = "fab fa-medium"
+
+[[social_icons]]
+id = "discord"
+url = "https://discord.gg/%s"
+title = "Discord"
+icon = "fab fa-discord"
+
+[[social_icons]]
+id = "strava"
+url = "https://www.strava.com/athletes/%s"
+title = "Strava"
+icon = "fab fa-strava"
+
+[[social_icons]]
+id = "steam"
+url = "https://steamcommunity.com/id/%s"
+title = "Steam"
+icon = "fab fa-steam"
+
+[[social_icons]]
+id = "quora"
+url = "https://www.quora.com/profile/%s"
+title = "Quora"
+icon = "fab fa-quora"
+
+[[social_icons]]
+id = "amazonwishlist"
+url = "https://amzn.com/w/%s"
+title = "Amazon Wishlist"
+icon = "fab fa-amazon"
+
+[[social_icons]]
+id = "slideshare"
+url = "https://www.slideshare.net/%s"
+title = "Slideshare"
+icon = "fab fa-slideshare"
+
+[[social_icons]]
+id = "angellist"
+url = "https://www.angel.co/p/%s"
+title = "AngelList"
+icon = "fab fa-angellist"
+
+[[social_icons]]
+id = "about"
+url = "%s"
+title = "About"
+icon = "fas fa-at"
+
+[[social_icons]]
+id = "lastfm"
+url = "https://www.last.fm/user/%s"
+title = "Last.fm"
+icon = "fab fa-lastfm"
+
+[[social_icons]]
+id = "bluesky"
+url = "https://bsky.app/profile/%s"
+title = "Bluesky"
+icon = "fab fa-bluesky"
+
+[[social_icons]]
+id = "goodreads"
+url = "https://goodreads.com/%s"
 title = "Goodreads"
 icon = "fab fa-goodreads"
-
-
