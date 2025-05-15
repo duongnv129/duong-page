@@ -19,13 +19,12 @@ Params:
   commit: false
   rss: true
   comments: true
-
-Author:
-  name: Duong Nguyen
-  email: duongnv129@gmail.com
-  github: duongnv129
-  twitter: duongnv129
-  linkedin: duongnv129
+  author:
+    name: Duong Nguyen
+    email: duongnv129@gmail.com
+    github: duongnv129
+    twitter: duongnv129
+    linkedin: duongnv129
 
 menu:
   main:
