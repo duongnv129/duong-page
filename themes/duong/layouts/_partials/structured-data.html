@@ -55,6 +55,26 @@
   ) -}}
 {{- else if eq .RelPermalink ("page/about/" | relURL) -}}
   {{- $graph = $graph | append (dict "@type" "ProfilePage" "url" .Permalink "name" .Title "mainEntity" $person) -}}
+  {{- $graph = $graph | append (dict
+      "@type" "BreadcrumbList"
+      "itemListElement" (slice
+        (dict "@type" "ListItem" "position" 1 "name" "Home" "item" site.Home.Permalink)
+        (dict "@type" "ListItem" "position" 2 "name" .Title "item" .Permalink)
+      )
+  ) -}}
+{{- else if and (in (slice "section" "term") .Kind) (not (partial "is-noindex.html" .)) -}}
+  {{- $items := slice -}}
+  {{- range $i, $p := .RegularPages -}}
+    {{- $items = $items | append (dict "@type" "ListItem" "position" (add $i 1) "url" $p.Permalink "name" $p.Title) -}}
+  {{- end -}}
+  {{- $graph = $graph | append (dict
+      "@type" "CollectionPage"
+      "url" .Permalink
+      "name" .Title
+      "description" (partial "page-description.html" .)
+      "author" (dict "@id" $personId)
+      "mainEntity" (dict "@type" "ItemList" "itemListElement" $items)
+  ) -}}
 {{- end -}}
 
 {{- with $graph }}

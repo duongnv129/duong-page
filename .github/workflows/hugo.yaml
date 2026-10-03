@@ -92,3 +92,17 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Tell Bing/IndexNow-compatible engines (they also feed ChatGPT and Copilot search) which
+  # URLs exist after each deploy. The key is public by design; it proves we own the site via
+  # https://duong.page/061dbb8a655f317a1c679f418d9549ba.txt. A failure here never blocks the deploy.
+  indexnow:
+    runs-on: ubuntu-latest
+    needs: deploy
+    continue-on-error: true
+    steps:
+      - name: Submit sitemap URLs to IndexNow
+        run: |
+          urls=$(curl -fsSL https://duong.page/sitemap.xml | grep -oE '<loc>[^<]+' | sed 's/<loc>//' | jq -R . | jq -s .)
+          jq -n --argjson urls "$urls" '{host: "duong.page", key: "061dbb8a655f317a1c679f418d9549ba", keyLocation: "https://duong.page/061dbb8a655f317a1c679f418d9549ba.txt", urlList: $urls}' \
+            | curl -fsS -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json; charset=utf-8' --data-binary @- -o /dev/null -w "IndexNow HTTP %{http_code}\n"

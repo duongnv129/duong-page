@@ -1,5 +1,5 @@
 ---
-title: "Bubble Tea vs Ink vs Ratatui"
+title: "Bubble Tea vs Ink vs Ratatui: TUI Benchmarks"
 subtitle: "I built the same terminal app three times and measured it"
 description: "Bubble Tea vs Ink vs Ratatui benchmarked on the same app: startup, memory, CPU per frame and binary size, plus which TUI framework to pick for Go, Rust or Node."
 date: 2026-10-03

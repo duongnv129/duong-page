@@ -92,6 +92,9 @@ CI pins **Hugo extended 0.147.2**. Use that version locally to avoid template dr
 - RSS (`layouts/home.rss.xml`) lists posts only, with full content.
 - `lastmod` comes from git (`enableGitInfo`), so CI must keep `fetch-depth: 0`. The workflow pins `--baseURL https://duong.page/` because the Pages-provided base URL is `http://`.
 - `content/page/_index.md` stops the `/page/` section list from rendering; the 404 page is `noindex`.
+- List pages get their own title and description from `_index.md` files: `content/post/_index.md`, `content/tags/_index.md`, and one per tag (`content/tags/<tag>/_index.md`). Add one when you introduce a new tag.
+- Thin tag pages (fewer than 2 posts) are `noindex, follow` and left out of the sitemap; the rule lives in `_partials/is-noindex.html`, which both `head.html` and the custom `layouts/sitemap.xml` use. Tags become indexable automatically at 2+ posts.
+- **IndexNow:** the `indexnow` job in the deploy workflow submits every sitemap URL to Bing and other IndexNow engines after each deploy. The key file is `static/061dbb8a655f317a1c679f418d9549ba.txt`; don't delete or rename it.
 
 ## Charts in posts
 

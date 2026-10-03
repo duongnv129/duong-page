@@ -8,7 +8,7 @@
 {{- else -}}
   {{- $title = printf "%s | %s" .Title $name -}}
 {{- end -}}
-{{- $noindex := or (eq .Kind "404") .Params.noindex -}}
+{{- $noindex := partial "is-noindex.html" . -}}
 {{- $og := partial "og-image.html" . -}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

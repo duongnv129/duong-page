@@ -1,0 +1,7 @@
+{{- /*
+  Pages kept out of search results (and out of the sitemap): the 404 page, anything with
+  front matter `noindex: true`, and tag pages with fewer than 2 posts, which would only
+  duplicate the post itself. A tag becomes indexable on its own once it has 2+ posts.
+*/ -}}
+{{- $thinTag := and (eq .Kind "term") (lt (len .RegularPages) 2) -}}
+{{- return (or (eq .Kind "404") (.Params.noindex | default false) $thinTag) -}}
