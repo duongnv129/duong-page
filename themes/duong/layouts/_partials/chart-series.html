@@ -1,0 +1,18 @@
+{{- /*
+  Returns the series style for a name: dict "slot" (1-3) and "texture" (bool).
+  Series are declared once per page so a framework keeps its color in every chart:
+    chart:
+      series:
+        - { name: "Bubble Tea", slot: 1 }
+        - { name: "Ink tuned", slot: 3, texture: true }
+  Context: dict "page" and "name". Unknown names fall back to "index" (0-based) order.
+*/ -}}
+{{- $style := dict "slot" (add (mod (.index | default 0) 3) 1) "texture" false -}}
+{{- with .page.Params.chart.series -}}
+  {{- range . -}}
+    {{- if eq .name $.name -}}
+      {{- $style = dict "slot" (.slot | default 1) "texture" (.texture | default false) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $style -}}

@@ -1,0 +1,61 @@
+{{- /*
+  Horizontal bar chart comparing one metric. Rendered at build time; no JavaScript.
+  Params: title (required), unit (subtitle, e.g. "ms, lower is better"),
+          suffix (appended to values, e.g. " ms"), better ("lower" default | "higher"), note.
+  Body: one bar per line, "Name = value" with optional "| tooltip detail":
+    {{< bar-chart title="Startup to first frame" unit="ms, lower is better" suffix=" ms" >}}
+    Bubble Tea = 13.3 | CPU 12 ms
+    Ratatui = 8.0
+    {{< /bar-chart >}}
+*/ -}}
+{{- $title := .Get "title" -}}
+{{- $suffix := .Get "suffix" | default "" -}}
+{{- $higher := eq (.Get "better") "higher" -}}
+
+{{- /* Parse the body into rows. */ -}}
+{{- $rows := slice -}}
+{{- range $i, $line := split (strings.TrimSpace .Inner) "\n" -}}
+  {{- $line = strings.TrimSpace $line -}}
+  {{- if and $line (strings.Contains $line "=") -}}
+    {{- $tip := "" -}}
+    {{- with strings.Contains $line "|" -}}
+      {{- $parts := split $line "|" -}}
+      {{- $line = strings.TrimSpace (index $parts 0) -}}
+      {{- $tip = strings.TrimSpace (delimit (after 1 $parts) "|") -}}
+    {{- end -}}
+    {{- $kv := split $line "=" -}}
+    {{- $raw := strings.TrimSpace (index $kv 1) -}}
+    {{- $rows = $rows | append (dict "name" (strings.TrimSpace (index $kv 0)) "raw" $raw "value" (float $raw) "tip" $tip) -}}
+  {{- else if $line -}}
+    {{- errorf "bar-chart %q: line %q must look like \"Name = value\" (%s)" $title $line $.Position -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $rows }}{{ errorf "bar-chart %q has no data (%s)" $title .Position }}{{ end -}}
+
+{{- $values := apply $rows "index" "." "value" -}}
+{{- $max := math.Max $values -}}
+{{- $best := cond $higher $max (math.Min $values) -}}
+
+<figure class="chart">
+  <figcaption>
+    <span class="chart-title">{{ $title }}</span>
+    {{- with .Get "unit" }}<span class="chart-unit">{{ . }}</span>{{ end }}
+  </figcaption>
+  <ul class="bars">
+    {{- range $i, $r := $rows }}
+      {{- $s := partial "chart-series.html" (dict "page" $.Page "name" $r.name "index" $i) }}
+      {{- /* Bars span at most 72% of the track so the value label always fits after them. */}}
+      {{- $pct := 0.0 }}
+      {{- if gt $max 0.0 }}{{ $pct = mul (div $r.value $max) 72 }}{{ end }}
+      {{- $isBest := eq $r.value $best }}
+      <li class="bar-row" tabindex="0"{{ with $r.tip }} data-tip="{{ . }}"{{ end }}>
+        <span class="bar-label">{{ $r.name }}</span>
+        <span class="bar-track">
+          <span class="bar-fill s{{ $s.slot }}{{ if $s.texture }} textured{{ end }}" style="width: {{ math.Max $pct 1 }}%"></span>
+          <span class="bar-value{{ if $isBest }} is-best{{ end }}">{{ $r.raw }}{{ $suffix }}{{ if $isBest }}<span class="sr-only"> (best)</span>{{ end }}</span>
+        </span>
+      </li>
+    {{- end }}
+  </ul>
+  {{- with .Get "note" }}<p class="chart-note">{{ . | markdownify }}</p>{{ end }}
+</figure>

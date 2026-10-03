@@ -1,0 +1,14 @@
+{{- /* Context: a page collection. Renders posts grouped by year, or an empty state. */ -}}
+{{- $pages := where . "Date.IsZero" false -}}
+{{- with $pages }}
+  {{- range .GroupByDate "2006" }}
+    <section class="year-group" aria-labelledby="y{{ .Key }}">
+      <h2 id="y{{ .Key }}">{{ .Key }}</h2>
+      <ul class="post-list">
+        {{- range .Pages }}{{ partial "post-item.html" . }}{{ end }}
+      </ul>
+    </section>
+  {{- end }}
+{{- else }}
+  <div class="empty-state"><p>No posts here yet. Check back soon.</p></div>
+{{- end }}

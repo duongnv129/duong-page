@@ -1,0 +1,13 @@
+{{- $a := site.Params.author }}
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; {{ now.Year }} {{ $a.name | default site.Title }}</p>
+    <ul aria-label="Elsewhere">
+      {{ with $a.github }}<li><a href="https://github.com/{{ . }}" rel="me noopener">GitHub</a></li>{{ end }}
+      {{ with $a.linkedin }}<li><a href="https://www.linkedin.com/in/{{ . }}" rel="me noopener">LinkedIn</a></li>{{ end }}
+      {{ with $a.twitter }}<li><a href="https://x.com/{{ . }}" rel="me noopener">X</a></li>{{ end }}
+      {{ with $a.email }}<li><a href="mailto:{{ . }}">Email</a></li>{{ end }}
+      {{ with site.Home.OutputFormats.Get "rss" }}<li><a href="{{ .RelPermalink }}">RSS</a></li>{{ end }}
+    </ul>
+  </div>
+</footer>

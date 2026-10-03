@@ -1,0 +1,21 @@
+{{- /* llms.txt (https://llmstxt.org): a plain index of the site for AI agents. Each post links to its Markdown copy. */ -}}
+{{- $a := site.Params.author -}}
+# {{ $a.name | default site.Title }}
+
+> {{ site.Params.description }}
+
+{{ with .Content }}{{ . | plainify | htmlUnescape | strings.TrimSpace }}
+
+{{ end -}}
+Author: {{ $a.name }}{{ with $a.github }}, https://github.com/{{ . }}{{ end }}{{ with $a.linkedin }}, https://www.linkedin.com/in/{{ . }}{{ end }}
+Feed: {{ with .OutputFormats.Get "rss" }}{{ .Permalink }}{{ end }}
+
+## Posts
+{{ range where site.RegularPages "Section" "post" }}
+- [{{ .Title }}]({{ with .OutputFormats.Get "markdown" }}{{ .Permalink }}{{ else }}{{ .Permalink }}{{ end }}): {{ partial "page-description.html" . }} ({{ .Date.Format "2006-01-02" }})
+{{- end }}
+
+## About
+{{ with site.GetPage "page/about" }}
+- [{{ .Title }}]({{ with .OutputFormats.Get "markdown" }}{{ .Permalink }}{{ else }}{{ .Permalink }}{{ end }}): {{ partial "page-description.html" . }}
+{{- end }}

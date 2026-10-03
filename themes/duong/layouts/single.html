@@ -1,0 +1,40 @@
+{{ define "main" }}
+<div class="wrap">
+  <article class="article">
+    <header class="article-head reveal">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.subtitle }}<p class="article-subtitle">{{ . }}</p>{{ end }}
+      {{ if not .Date.IsZero }}
+      <div class="article-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (site.Params.dateFormat | default "January 2, 2006") }}</time>
+        <span>{{ .ReadingTime }} min read</span>
+      </div>
+      {{ end }}
+    </header>
+
+    <div class="prose reveal reveal-2">
+      {{ .Content }}
+    </div>
+
+    {{- $tags := .GetTerms "tags" }}
+    {{- if or $tags (and (not .Date.IsZero) (or .PrevInSection .NextInSection)) }}
+    <footer class="article-foot">
+      {{ with $tags }}
+      <ul class="tag-cloud" aria-label="Tags">
+        {{ range . }}<li><a class="tag" href="{{ .RelPermalink }}">#{{ .Title | lower }}</a></li>{{ end }}
+      </ul>
+      {{ end }}
+      {{ if not .Date.IsZero }}
+      {{ if or .PrevInSection .NextInSection }}
+      <nav class="pager" aria-label="More posts">
+        {{- /* With newest-first sorting, PrevInSection is the older post. */}}
+        {{ with .PrevInSection }}<a class="prev" href="{{ .RelPermalink }}"><span class="label">Older</span><span class="title">{{ .Title }}</span></a>{{ end }}
+        {{ with .NextInSection }}<a class="next" href="{{ .RelPermalink }}"><span class="label">Newer</span><span class="title">{{ .Title }}</span></a>{{ end }}
+      </nav>
+      {{ end }}
+      {{ end }}
+    </footer>
+    {{- end }}
+  </article>
+</div>
+{{ end }}

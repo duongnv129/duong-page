@@ -1,0 +1,6 @@
+{{- /* Context: a taxonomy (e.g. site.Taxonomies.tags). */ -}}
+<ul class="tag-cloud">
+  {{- range .ByCount }}
+    <li><a class="tag" href="{{ .Page.RelPermalink }}">#{{ .Page.Title | lower }} <span class="tag-count">{{ .Count }}</span></a></li>
+  {{- end }}
+</ul>

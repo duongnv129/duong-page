@@ -1,0 +1,19 @@
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="{{ "/" | relURL }}" aria-label="{{ site.Title }}, home">
+      {{ with resources.Get "img/duong.jpg" }}{{ with .Process "fill 56x56 Top webp q80" }}<img src="{{ .RelPermalink }}" alt="" width="28" height="28">{{ end }}{{ end }}
+      <span>{{ site.Title }}</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      {{- $current := . }}
+      {{- range site.Menus.main.ByWeight }}
+        {{- $url := .URL | relURL }}
+        <a href="{{ $url }}"{{ if eq (strings.TrimSuffix "/" $url) (strings.TrimSuffix "/" $current.RelPermalink) }} aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{- end }}
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" data-theme-toggle>
+      {{ partial "icons/moon.html" . }}
+      {{ partial "icons/sun.html" . }}
+    </button>
+  </div>
+</header>
