@@ -3,7 +3,7 @@ contentdir: content
 layoutdir: layouts
 publishdir: public
 title: Duong
-canonifyurls: true
+canonifyurls: false
 languageCode: en
 enableRobotsTXT: true
 # lastmod comes from git history (CI checks out with fetch-depth: 0), so sitemap and
