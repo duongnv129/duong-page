@@ -5,4 +5,5 @@
 {{- else -}}
   {{- $d = or .Description .Summary .Params.subtitle site.Params.description -}}
 {{- end -}}
-{{- return ($d | plainify | htmlUnescape | strings.TrimSpace | truncate 160) -}}
+{{- /* truncate HTML-escapes its result, so unescape after it; html/template re-escapes where needed. */ -}}
+{{- return ($d | plainify | truncate 160 | htmlUnescape | strings.TrimSpace) -}}

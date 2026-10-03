@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Contents
 
 - [Overview](#overview)
+- [Writing style](#writing-style) (applies to every post and page)
 - [Every post: SEO checklist](#every-post-seo-checklist) (required whenever a post is created or edited)
 - [Commands](#commands)
 - [Deployment](#deployment)
@@ -16,6 +17,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Overview
 
 Personal blog for https://duong.page, built with Hugo and a custom theme, `themes/duong`. Content only; there is no application code, no package.json, and no tests.
+
+## Writing style
+
+Apply this to every post and page, new or edited:
+
+- **Sound like a native US English speaker.** Natural, conversational sentences, contractions ("I'm", "you'll"), US spelling ("favorite", "color").
+- **Add a bit of fun.** A light joke or a relatable aside now and then so readers enjoy it; never at the cost of clarity, and never forced.
+- **Keep it short and easy to read.** Short paragraphs, plain words, skimmable headings and lists. Cut anything that doesn't help the reader. A welcome or about page fits in a 2-minute read.
+- **How to describe the author:** Duong, a backend engineer. Not tied to one language (don't say "a Go developer" or "mostly in Go"). Use "Duong" in visible copy; the full name "Duong Nguyen" stays in site metadata (`params.author.name`, structured data).
+- **Only real facts.** Don't invent experience, employers, numbers, or projects. If a detail is unknown, leave it out or ask.
 
 ## Every post: SEO checklist
 
@@ -31,6 +42,7 @@ Personal blog for https://duong.page, built with Hugo and a custom theme, `theme
 8. **Charts**: follow every chart group with a table of the same numbers so crawlers, agents and the Markdown copy get the data.
 9. **Verify** with `docker compose run --rm build`, then check `public/post/<slug>/index.html` for the `<title>`, meta description and `application/ld+json`, and confirm the post is listed in `public/llms.txt` and `public/sitemap.xml`.
 10. **No em-dashes** in visible text.
+11. **Style:** the post follows [Writing style](#writing-style).
 
 ## Commands
 

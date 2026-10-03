@@ -44,7 +44,7 @@ markup:
 Params:
   subtitle: Duong's Blog
   homeTitle: Duong Nguyen | Software Engineering Blog
-  description: Software engineer writing about technology, simplicity, and lifelong learning.
+  description: Duong is a backend software engineer who writes practical guides on building simple, reliable software, useful tools, and lessons from the job.
   logo: img/duong.jpg
   favicon: img/duong.ico
   dateFormat: "January 2, 2006"
