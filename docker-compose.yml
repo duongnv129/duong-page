@@ -1,0 +1,30 @@
+# Local preview and build, pinned to the same Hugo version as CI (.github/workflows/hugo.yaml).
+#   docker compose up                 -> live preview at http://localhost:1313 (includes drafts)
+#   docker compose run --rm build     -> production build into ./public, same flags as CI
+# The server renders into a container-only directory: hugo server also serves files found on
+# disk in its destination, so sharing ./public would make it serve the production build.
+services:
+  hugo:
+    image: hugomods/hugo:exts-0.147.2
+    working_dir: /src
+    volumes:
+      - .:/src
+    ports:
+      - "1313:1313"
+    command: >
+      hugo server
+      --bind 0.0.0.0
+      --port 1313
+      --baseURL http://localhost:1313/
+      --buildDrafts
+      --disableFastRender
+      --poll 700ms
+      --destination /tmp/hugo-server
+
+  build:
+    image: hugomods/hugo:exts-0.147.2
+    working_dir: /src
+    volumes:
+      - .:/src
+    profiles: ["build"]
+    command: hugo --gc --minify

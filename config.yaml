@@ -4,15 +4,47 @@ layoutdir: layouts
 publishdir: public
 title: Duong
 canonifyurls: true
+languageCode: en
+enableRobotsTXT: true
+# lastmod comes from git history (CI checks out with fetch-depth: 0), so sitemap and
+# article:modified_time reflect real edits.
+enableGitInfo: true
+frontmatter:
+  lastmod: [":git", "lastmod", ":fileModTime", "date"]
+
+taxonomies:
+  tag: tags
+
+outputFormats:
+  markdown:
+    mediaType: text/markdown
+    baseName: index
+    isPlainText: true
+  llms:
+    mediaType: text/plain
+    baseName: llms
+    isPlainText: true
+    notAlternative: true
+
+outputs:
+  home: [html, rss, llms]
+  page: [html, markdown]
+
+mediaTypes:
+  text/markdown:
+    suffixes: [md]
 
 DefaultContentLanguage: en
-theme: beautifulhugo
+theme: duong
 metaDataFormat: yaml
-pygmentsUseClasses: true
-pygmentCodeFences: true
+markup:
+  highlight:
+    noClasses: false
 
 Params:
   subtitle: Duong's Blog
+  homeTitle: Duong Nguyen | Software Engineering Blog
+  description: Software engineer writing about technology, simplicity, and lifelong learning.
   logo: img/duong.jpg
   favicon: img/duong.ico
   dateFormat: "January 2, 2006"

@@ -1,0 +1,4 @@
+name = "duong"
+license = "MIT"
+description = "Personal blog theme for duong.page: Geist type, zinc neutrals, one accent, light and dark modes."
+min_version = "0.146.0"

@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="wrap">
+  <header class="page-head reveal">
+    <h1>{{ .Title }}</h1>
+    <p>Browse posts by topic.</p>
+  </header>
+  <div class="page-body reveal reveal-2">
+    {{ with index site.Taxonomies .Data.Plural }}
+      {{ partial "tag-cloud.html" . }}
+    {{ else }}
+      <div class="empty-state"><p>No topics yet.</p></div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="wrap">
+  <header class="page-head reveal">
+    <h1>{{ if eq .Kind "term" }}#{{ .Title | lower }}{{ else }}{{ .Title }}{{ end }}</h1>
+    {{ $n := len .RegularPages }}
+    <p>{{ with .Description }}{{ . }}{{ else }}{{ $n }} {{ cond (eq $n 1) "post" "posts" }}{{ end }}</p>
+  </header>
+  <div class="page-body reveal reveal-2">
+    {{ partial "posts-by-year.html" .RegularPages }}
+  </div>
+</div>
+{{ end }}

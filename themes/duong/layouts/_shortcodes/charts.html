@@ -1,0 +1,19 @@
+{{- /*
+  Groups bar charts into a wide grid with one shared legend (from the page's chart.series).
+  Usage:
+    {{< charts >}}
+      {{< bar-chart ... >}} ... {{< /bar-chart >}}
+    {{< /charts >}}
+*/ -}}
+<div class="chart-group">
+  {{- with .Page.Params.chart.series }}
+  <ul class="chart-legend" aria-label="Legend">
+    {{- range . }}
+      <li><span class="swatch s{{ .slot | default 1 }}{{ if .texture }} textured{{ end }}" aria-hidden="true"></span>{{ .name }}</li>
+    {{- end }}
+  </ul>
+  {{- end }}
+  <div class="chart-grid">
+    {{ .Inner }}
+  </div>
+</div>

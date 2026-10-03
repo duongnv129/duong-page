@@ -1,0 +1,42 @@
+{{- /*
+  Returns a 1200x630 share card for the page: title, subtitle and site line drawn at build time.
+  Front matter `image` (page resource or assets path) overrides it. Returns a resource or nil.
+*/ -}}
+{{- $img := "" -}}
+{{- with .Params.image -}}
+  {{- $img = or ($.Resources.Get .) (resources.Get .) -}}
+{{- end -}}
+{{- if not $img -}}
+  {{- $bold := resources.Get "fonts/geist-600.ttf" -}}
+  {{- $regular := resources.Get "fonts/geist-400.ttf" -}}
+  {{- $title := cond .IsHome (site.Params.author.name | default site.Title) .Title -}}
+  {{- $sub := cond .IsHome site.Params.description (.Params.subtitle | default "") -}}
+  {{- /* Wrap the title ourselves (~28 chars per line at 64px) so it keeps an 80px right margin;
+         Hugo would only wrap at the image edge. The line count also places the subtitle. */ -}}
+  {{- $wrapped := slice -}}{{- $cur := "" -}}
+  {{- range split $title " " -}}
+    {{- if and $cur (gt (add (len $cur) (len .) 1) 28) -}}
+      {{- $wrapped = $wrapped | append $cur -}}{{- $cur = . -}}
+    {{- else -}}
+      {{- $cur = cond (eq $cur "") . (printf "%s %s" $cur .) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $wrapped = $wrapped | append $cur -}}
+  {{- $lines := len $wrapped -}}
+  {{- $title = delimit $wrapped "\n" -}}
+  {{- $titleY := cond (gt $lines 2) 90 140 -}}
+  {{- $subY := add $titleY (mul $lines 78) 36 -}}
+  {{- $filters := slice
+      (images.Overlay (resources.Get "img/og-accent.png") 0 0)
+      (images.Text $title (dict "font" $bold "size" 64 "color" "#ececee" "x" 80 "y" $titleY "linespacing" 14))
+      (images.Text (site.BaseURL | replaceRE `^https?://|/$` "") (dict "font" $regular "size" 28 "color" "#fb923c" "x" 80 "y" 540))
+  -}}
+  {{- with $sub -}}
+    {{- $filters = $filters | append (images.Text . (dict "font" $regular "size" 34 "color" "#a1a1aa" "x" 80 "y" $subY "linespacing" 10)) -}}
+  {{- end -}}
+  {{- $img = (resources.Get "img/og-base.png") | images.Filter $filters -}}
+  {{- /* Name the card after the URL path: works for pages without a content file (tag lists, 404). */ -}}
+  {{- $key := strings.Trim .RelPermalink "/" | replaceRE `[^a-zA-Z0-9]+` "-" | default "home" -}}
+  {{- $img = $img.Process "png" | resources.Copy (printf "img/og/%s.png" $key) -}}
+{{- end -}}
+{{- return $img -}}

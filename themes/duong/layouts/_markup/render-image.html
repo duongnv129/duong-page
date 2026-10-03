@@ -1,0 +1,7 @@
+{{- /* Page-bundle images get real dimensions (no layout shift); everything else is lazy-loaded as-is. */ -}}
+{{- $img := .Page.Resources.Get .Destination -}}
+{{- if and $img (eq $img.ResourceType "image") (ne $img.MediaType.SubType "svg") -}}
+  <img src="{{ $img.RelPermalink }}" alt="{{ .Text }}" width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy" decoding="async"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- else -}}
+  <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy" decoding="async"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- end -}}

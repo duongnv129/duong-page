@@ -1,0 +1,8 @@
+{{- /* One description for meta, Open Graph, JSON-LD and llms.txt: front matter description, else summary, else site description. */ -}}
+{{- $d := "" -}}
+{{- if .IsHome -}}
+  {{- $d = site.Params.description -}}
+{{- else -}}
+  {{- $d = or .Description .Summary .Params.subtitle site.Params.description -}}
+{{- end -}}
+{{- return ($d | plainify | htmlUnescape | strings.TrimSpace | truncate 160) -}}
