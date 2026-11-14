@@ -12,6 +12,7 @@ This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, etc
 - [Structure](#structure)
 - [SEO and AI discoverability](#seo-and-ai-discoverability) (how the theme implements it)
 - [Charts in posts](#charts-in-posts)
+- [Comments](#comments)
 - [Menu and tags coupling](#menu-and-tags-coupling)
 
 ## Overview
@@ -114,6 +115,16 @@ Bubble Tea = 13.3 | optional tooltip detail
 ```
 
 Every bar shows its value (teal is under 3:1 on the light background), the best value gets a check mark, and a table of the same numbers should follow the charts. New files under `layouts/` (e.g. `_shortcodes/`) need `docker compose restart hugo` before the dev server sees them.
+
+## Comments
+
+Posts get [Giscus](https://giscus.app/) comments (GitHub Discussions, one thread per post matched by URL path). Readers need a GitHub account.
+
+- `_partials/comments.html` renders it at the bottom of `single.html`, for the `post` section only. The widget loads when a reader clicks "Load comments", and it follows the header light/dark toggle.
+- IDs live in `config.yaml` under `params.giscus` (repo, category `Announcements`). The Giscus GitHub app must stay installed on the repo and Discussions must stay enabled.
+- Turn it off for one post with `comments: false` in front matter, or for the whole site with `params.comments: false`.
+- Changing a post's URL starts a new thread, so keep slugs stable.
+- Comments aren't in the Markdown copy, `llms.txt` or JSON-LD.
 
 ## Menu and tags coupling
 

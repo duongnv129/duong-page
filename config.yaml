@@ -51,6 +51,11 @@ Params:
   commit: false
   rss: true
   comments: true
+  giscus:
+    repo: duongnv129/duong-page
+    repoId: R_kgDOEEPEBw
+    category: Announcements
+    categoryId: DIC_kwDOEEPEB84DLFg9
   author:
     name: Duong Nguyen
     email: duongnv129@gmail.com

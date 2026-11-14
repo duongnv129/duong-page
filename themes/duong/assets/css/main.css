@@ -59,7 +59,7 @@
   --text: #18181b;
   --muted: #52525b;
   --faint: #71717a;
-  --line: #e4e4e7;
+  --line: #c8c8ce;
   --accent: #c2410c;
   --accent-contrast: #fafafa;
   --code-bg: #f4f4f5;
@@ -302,6 +302,18 @@ a { color: inherit; }
   .pager { grid-template-columns: 1fr; }
   .pager .next { grid-column: 1; }
 }
+
+/* Comments (Giscus, loaded on click) */
+.comments { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+.comments h2 { margin: 0 0 0.5rem; font-size: 1.3125rem; letter-spacing: -0.02em; font-weight: 600; }
+.comments-note { margin: 0 0 1rem; color: var(--muted); font-size: 0.9375rem; }
+.comments-load {
+  padding: 0.5rem 1rem; border: 1px solid var(--line); border-radius: var(--radius);
+  background: transparent; color: var(--text); font: inherit; font-weight: 500; cursor: pointer;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.comments-load:hover { border-color: var(--accent); color: var(--accent); }
+.comments .giscus, .comments .giscus-frame { width: 100%; }
 
 /* Prose */
 .prose > :first-child { margin-top: 0; }
