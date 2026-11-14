@@ -20,9 +20,12 @@
     var media = window.matchMedia("(prefers-color-scheme: dark)");
     var ORIGIN = "https://giscus.app";
 
+    /* Custom themes live in themes/duong/static/css/giscus-{light,dark}.css and reuse the site's tokens.
+       The Giscus iframe is HTTPS, so it blocks a stylesheet from plain http (local preview). There we use its built-in theme. */
     function theme() {
-      var dark = (root.dataset.theme || (media.matches ? "dark" : "light")) === "dark";
-      return dark ? "noborder_dark" : "noborder_light";
+      var mode = (root.dataset.theme || (media.matches ? "dark" : "light")) === "dark" ? "dark" : "light";
+      if (location.protocol !== "https:") return "noborder_" + mode;
+      return location.origin + "/css/giscus-" + mode + ".css";
     }
     function syncTheme() {
       var frame = box.querySelector("iframe.giscus-frame");
@@ -41,7 +44,7 @@
         "data-category-id": box.dataset.categoryId,
         "data-mapping": "pathname",
         "data-strict": "1",
-        "data-reactions-enabled": "1",
+        "data-reactions-enabled": "0",
         "data-emit-metadata": "0",
         "data-input-position": "top",
         "data-theme": theme(),
