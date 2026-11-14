@@ -21,10 +21,11 @@
     var ORIGIN = "https://giscus.app";
 
     /* Custom themes live in themes/duong/static/css/giscus-{light,dark}.css and reuse the site's tokens.
-       The Giscus iframe is HTTPS, so it blocks a stylesheet from plain http (local preview). There we use its built-in theme. */
+       The Giscus iframe is HTTPS, so it blocks a stylesheet from plain http (local preview). There we use Giscus's
+       built-in light/dark theme, which has visible borders (its "noborder" themes have none). */
     function theme() {
       var mode = (root.dataset.theme || (media.matches ? "dark" : "light")) === "dark" ? "dark" : "light";
-      if (location.protocol !== "https:") return "noborder_" + mode;
+      if (location.protocol !== "https:") return mode;
       return location.origin + "/css/giscus-" + mode + ".css";
     }
     function syncTheme() {
