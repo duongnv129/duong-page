@@ -15,10 +15,10 @@ main {
   --color-fg-subtle: #71717a;       /* --faint */
   --color-canvas-default: #fafafa;  /* --bg, so the editor blends into the page */
   --color-canvas-overlay: #fafafa;
-  --color-border-default: #e4e4e7;  /* --line */
-  --color-border-muted: #e4e4e7;
+  --color-border-default: #c8c8ce;  /* --line */
+  --color-border-muted: #c8c8ce;
   --color-btn-text: #18181b;
-  --color-btn-border: #e4e4e7;
+  --color-btn-border: #c8c8ce;
   --color-btn-hover-border: #c2410c;
   --color-btn-primary-text: #fafafa; /* --accent-contrast */
   --color-segmented-control-bg: #f1f1f2;
