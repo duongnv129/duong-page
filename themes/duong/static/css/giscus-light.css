@@ -8,7 +8,7 @@ main{--primary-default:5,92,55;--bg-default:246,246,247;--color-prettylights-syn
 /* duong.page overrides */
 main {
   --primary-default: 194, 65, 12;   /* --accent #c2410c */
-  --bg-default: 241, 241, 242;      /* --surface #f1f1f2 */
+  --bg-default: 250, 250, 250;      /* --bg #fafafa: flat fills with outlines, like the page's tags and cards */
 
   --color-fg-default: #18181b;      /* --text */
   --color-fg-muted: #52525b;        /* --muted */
