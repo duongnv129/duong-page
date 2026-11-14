@@ -1,0 +1,60 @@
+{{- /* Giscus comments (GitHub Discussions), one thread per post, matched by URL path.
+       Shown on posts only. Turn off site-wide with `params.comments: false`, or per post with `comments: false` in front matter.
+       The widget loads on click, so readers who don't want it never fetch giscus.app. */ -}}
+{{- $g := site.Params.giscus -}}
+{{- if and site.Params.comments $g $g.repoid (eq .Section "post") (ne .Params.comments false) }}
+<section class="comments" aria-labelledby="comments-heading" data-comments
+  data-repo="{{ $g.repo }}" data-repo-id="{{ $g.repoid }}"
+  data-category="{{ $g.category }}" data-category-id="{{ $g.categoryid }}">
+  <h2 id="comments-heading">Comments</h2>
+  <p class="comments-note">Comments live in GitHub Discussions, so you'll need a GitHub account to post.</p>
+  <button class="comments-load" type="button" data-comments-load>Load comments</button>
+  <noscript><p class="comments-note">Turn on JavaScript to see comments, or <a href="https://github.com/{{ $g.repo }}/discussions">browse the discussions on GitHub</a>.</p></noscript>
+</section>
+<script>
+  (function () {
+    var box = document.querySelector("[data-comments]");
+    var button = box && box.querySelector("[data-comments-load]");
+    if (!button) return;
+    var root = document.documentElement;
+    var media = window.matchMedia("(prefers-color-scheme: dark)");
+    var ORIGIN = "https://giscus.app";
+
+    function theme() {
+      var dark = (root.dataset.theme || (media.matches ? "dark" : "light")) === "dark";
+      return dark ? "noborder_dark" : "noborder_light";
+    }
+    function syncTheme() {
+      var frame = box.querySelector("iframe.giscus-frame");
+      if (frame) frame.contentWindow.postMessage({ giscus: { setConfig: { theme: theme() } } }, ORIGIN);
+    }
+
+    button.addEventListener("click", function () {
+      var script = document.createElement("script");
+      script.src = ORIGIN + "/client.js";
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      var attrs = {
+        "data-repo": box.dataset.repo,
+        "data-repo-id": box.dataset.repoId,
+        "data-category": box.dataset.category,
+        "data-category-id": box.dataset.categoryId,
+        "data-mapping": "pathname",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "top",
+        "data-theme": theme(),
+        "data-lang": "en",
+        "data-loading": "lazy"
+      };
+      Object.keys(attrs).forEach(function (key) { script.setAttribute(key, attrs[key]); });
+      box.appendChild(script);
+      button.remove();
+      /* Follow the header theme toggle and the system setting. */
+      new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+      media.addEventListener("change", syncTheme);
+    });
+  })();
+</script>
+{{- end }}
