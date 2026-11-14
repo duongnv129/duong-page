@@ -280,8 +280,8 @@ a { color: inherit; }
 .article { max-width: var(--measure); margin-inline: auto; padding-block: 3.5rem 4rem; }
 .article-head { margin-bottom: 2.5rem; }
 .article-head h1 {
-  margin: 0; font-size: clamp(2rem, 4.5vw, 2.875rem);
-  line-height: 1.12; letter-spacing: -0.03em; font-weight: 650;
+  margin: 0; font-size: clamp(1.625rem, 3.5vw, 2.25rem);
+  line-height: 1.18; letter-spacing: -0.025em; font-weight: 650;
 }
 .article-subtitle { margin: 0.75rem 0 0; font-size: 1.25rem; line-height: 1.5; color: var(--muted); }
 .article-meta {
