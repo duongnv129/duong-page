@@ -21,6 +21,12 @@ main {
   --color-btn-border: #27272a;
   --color-btn-hover-border: #fb923c;
   --color-btn-primary-text: #18181b; /* --accent-contrast */
+  /* The dark base makes the primary button 45% opaque; use a solid accent like light mode. */
+  --color-btn-primary-bg: #fb923c;
+  --color-btn-primary-border: #fb923c;
+  --color-btn-primary-hover-bg: #fdba74;
+  --color-btn-primary-hover-border: #fdba74;
+  --color-btn-primary-selected-bg: #fb923c;
   --color-segmented-control-bg: #17171a;
   --color-segmented-control-button-bg: #0c0c0e;
   --color-accent-fg: #fb923c;
